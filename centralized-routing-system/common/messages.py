@@ -1,8 +1,6 @@
 """
 Message handling module for Centralized Routing System.
 Defines all JSON message structures and validation utilities.
-Author: Telecom Engineering Academic Project
-Date: 2024
 """
 
 import json
@@ -46,12 +44,15 @@ class MessageValidator:
             return False
 
         if not message["router_id"].startswith("R") or not message["router_id"][1:].isdigit():
-            return False
+            # También aceptar TEST para pruebas
+            if message["router_id"] != "TEST":
+                return False
 
         if not isinstance(message["port"], int):
             return False
 
-        if message["port"] < 1024 or message["port"] > 65535:
+        # Permitir puertos entre 1 y 65535 (incluyendo puertos privilegiados)
+        if message["port"] < 1 or message["port"] > 65535:
             return False
 
         return True

@@ -5,10 +5,15 @@ Author: Telecom Engineering Academic Project
 Date: 2024
 """
 
+import sys
+import os
+
+# Add project root to Python path
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import socket
 import json
 import threading
-import sys
 import time
 from typing import Dict, Optional
 
@@ -177,6 +182,11 @@ class Router:
             return
 
         try:
+            # Verificar que la conexión sigue activa
+            if self.controller_socket is None:
+                self.logger.error("No connection to controller")
+                return
+
             neighbors_list = [
                 {"neighbor_id": nid, "cost": cost}
                 for nid, cost in self.neighbors.items()
@@ -184,17 +194,30 @@ class Router:
 
             message = MessageFactory.create_topology_update(self.router_id, neighbors_list)
 
+            self.logger.debug(f"Sending topology update: {message}")
+
+            # Enviar mensaje
             self.controller_socket.sendall(message.encode('utf-8'))
-            self.logger.debug(f"Sent topology update: {message}")
 
-            response_data = self.controller_socket.recv(4096).decode('utf-8')
-            response = json.loads(response_data)
+            # Recibir respuesta con timeout
+            self.controller_socket.settimeout(5)
+            try:
+                response_data = self.controller_socket.recv(4096).decode('utf-8')
+                response = json.loads(response_data)
 
-            if response.get('type') == MessageType.ACKNOWLEDGMENT:
-                self.logger.info(f"Topology update successful: {response.get('details')}")
-            else:
-                self.logger.error(f"Topology update failed: {response}")
+                if response.get('type') == MessageType.ACKNOWLEDGMENT:
+                    self.logger.info(f"Topology update successful: {response.get('details')}")
+                else:
+                    self.logger.error(f"Topology update failed: {response}")
+            except socket.timeout:
+                self.logger.error("Timeout waiting for response from controller")
+            except Exception as e:
+                self.logger.error(f"Error receiving response: {e}")
 
+        except socket.error as e:
+            self.logger.error(f"Socket error sending topology: {e}")
+            self.connected_to_controller = False
+            self.controller_socket = None
         except Exception as e:
             self.logger.error(f"Error sending topology: {e}")
 

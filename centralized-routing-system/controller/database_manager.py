@@ -5,11 +5,15 @@ Author: Telecom Engineering Academic Project
 Date: 2024
 """
 
+import sys
+import os
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 import mysql.connector
 from mysql.connector import Error
 from typing import Dict, List, Optional, Any
 import json
-import os
 
 
 class DatabaseManager:

@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """
 Main launcher for Centralized Routing System.
-Author: Telecom Engineering Academic Project
-Date: 2024
 """
 
 import os
@@ -23,10 +21,10 @@ def show_banner():
 def check_dependencies():
     try:
         import mysql.connector
-        print("✓ mysql-connector-python instalado")
+        print("✓ mysql-connector-python installed")
         return True
     except ImportError:
-        print("✗ Instalando mysql-connector-python...")
+        print("✗ Installing mysql-connector-python...")
         subprocess.check_call([sys.executable, "-m", "pip", "install", "mysql-connector-python"])
         return True
 
@@ -35,11 +33,11 @@ def main():
     os.system('cls' if os.name == 'nt' else 'clear')
     show_banner()
 
-    print("\nVerificando dependencias...")
+    print("\nChecking dependencies...")
     check_dependencies()
 
     print("\n" + "=" * 50)
-    print("Iniciando sistema...")
+    print("Starting system...")
     print("=" * 50)
 
     try:
@@ -47,10 +45,10 @@ def main():
         menu = InteractiveMenu()
         menu.run()
     except KeyboardInterrupt:
-        print("\n\nSistema terminado.")
+        print("\n\nSystem terminated.")
     except Exception as e:
         print(f"\nError: {e}")
-        print("\nEjecuta 'python setup_database.py' para configurar la base de datos.")
+        print("\nRun 'python setup_database.py' to configure the database first.")
 
 
 if __name__ == "__main__":

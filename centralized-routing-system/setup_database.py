@@ -1,4 +1,9 @@
-# setup_database.py (VERSIÓN CORREGIDA)
+#!/usr/bin/env python3
+"""
+Setup script for Centralized Routing System database.
+Run this script to initialize the database connection.
+"""
+
 import os
 import sys
 import json
@@ -17,27 +22,30 @@ def setup_database():
         'password': '',
     }
 
-    print("\n[1/3] Verificando MySQL...")
+    print("\n[1/3] Verifying MySQL...")
     try:
         conn = mysql.connector.connect(**config)
         cursor = conn.cursor()
-        print("  ✓ MySQL está corriendo")
+        print("  ✓ MySQL is running")
     except Error as e:
         print(f"  ✗ Error: {e}")
+        print("\n  Solutions:")
+        print("    1. Open XAMPP Control Panel")
+        print("    2. Click 'Start' next to MySQL")
         return False
 
-    print("\n[2/3] Configurando base de datos...")
+    print("\n[2/3] Creating database...")
     try:
         cursor.execute("CREATE DATABASE IF NOT EXISTS routing_system")
         cursor.execute("USE routing_system")
-        print("  ✓ Base de datos lista")
+        print("  ✓ Database 'routing_system' ready")
     except Error as e:
         print(f"  ✗ Error: {e}")
         return False
 
-    print("\n[3/3] Creando tablas...")
+    print("\n[3/3] Creating tables...")
 
-    # Tablas
+    # Create tables
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS routers (
             router_id VARCHAR(10) PRIMARY KEY,
@@ -48,7 +56,7 @@ def setup_database():
             is_active BOOLEAN DEFAULT TRUE
         )
     """)
-    print("  ✓ Tabla 'routers'")
+    print("  ✓ Table 'routers'")
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS topology_links (
@@ -61,7 +69,7 @@ def setup_database():
             is_active BOOLEAN DEFAULT TRUE
         )
     """)
-    print("  ✓ Tabla 'topology_links'")
+    print("  ✓ Table 'topology_links'")
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS routing_tables (
@@ -74,7 +82,7 @@ def setup_database():
             is_current BOOLEAN DEFAULT TRUE
         )
     """)
-    print("  ✓ Tabla 'routing_tables'")
+    print("  ✓ Table 'routing_tables'")
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS events_log (
@@ -86,7 +94,7 @@ def setup_database():
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
-    print("  ✓ Tabla 'events_log'")
+    print("  ✓ Table 'events_log'")
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS system_configuration (
@@ -96,15 +104,19 @@ def setup_database():
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         )
     """)
-    print("  ✓ Tabla 'system_configuration'")
+    print("  ✓ Table 'system_configuration'")
 
-    # Insertar datos demo
-    print("\n  Insertando datos demo...")
+    # Insert demo data
+    print("\n  Inserting demo data...")
 
-    # Routers
-    routers = [('R1', '127.0.0.1', 5001), ('R2', '127.0.0.1', 5002), ('R3', '127.0.0.1', 5003),
-               ('R4', '127.0.0.1', 5004)]
-    for r in routers:
+    # Demo routers
+    demo_routers = [
+        ('R1', '127.0.0.1', 5001),
+        ('R2', '127.0.0.1', 5002),
+        ('R3', '127.0.0.1', 5003),
+        ('R4', '127.0.0.1', 5004)
+    ]
+    for router in demo_routers:
         cursor.execute("""
             INSERT INTO routers (router_id, ip_address, port_number, is_active)
             VALUES (%s, %s, %s, TRUE)
@@ -112,12 +124,15 @@ def setup_database():
             ip_address = VALUES(ip_address),
             port_number = VALUES(port_number),
             is_active = TRUE
-        """, r)
-    print("  ✓ Routers demo insertados")
+        """, router)
+    print("  ✓ Demo routers inserted")
 
-    # Topología
-    links = [('R1', 'R2', 2), ('R1', 'R3', 5), ('R1', 'R4', 4), ('R2', 'R3', 1), ('R3', 'R4', 3)]
-    for r1, r2, cost in links:
+    # Demo topology
+    demo_links = [
+        ('R1', 'R2', 2), ('R1', 'R3', 5), ('R1', 'R4', 4),
+        ('R2', 'R3', 1), ('R3', 'R4', 3)
+    ]
+    for r1, r2, cost in demo_links:
         if r1 < r2:
             cursor.execute("""
                 INSERT INTO topology_links (router1, router2, cost, is_active)
@@ -134,26 +149,27 @@ def setup_database():
                 cost = VALUES(cost),
                 is_active = TRUE
             """, (r2, r1, cost))
-    print("  ✓ Topología demo insertada")
+    print("  ✓ Demo topology inserted")
 
-    # Configuración
+    # System configuration
     configs = [
         ('dijkstra_auto_recompute', 'true', 'Auto-recompute routes'),
         ('max_routers', '100', 'Maximum number of routers'),
-        ('connection_timeout', '30', 'TCP timeout')
+        ('connection_timeout', '30', 'TCP timeout in seconds')
     ]
-    for k, v, d in configs:
+    for key, value, desc in configs:
         cursor.execute("""
             INSERT INTO system_configuration (config_key, config_value, description)
             VALUES (%s, %s, %s)
             ON DUPLICATE KEY UPDATE
-            config_value = VALUES(config_value)
-        """, (k, v, d))
-    print("  ✓ Configuración insertada")
+            config_value = VALUES(config_value),
+            description = VALUES(description)
+        """, (key, value, desc))
+    print("  ✓ System configuration inserted")
 
     conn.commit()
 
-    # Guardar configuración de conexión
+    # Save connection config
     os.makedirs('data', exist_ok=True)
     db_config = {
         'host': 'localhost',
@@ -164,29 +180,14 @@ def setup_database():
     }
     with open('data/db_config.json', 'w') as f:
         json.dump(db_config, f, indent=2)
+    print("  ✓ Database config saved")
 
     cursor.close()
     conn.close()
 
     print("\n" + "=" * 70)
-    print("  ✅ BASE DE DATOS CONFIGURADA CORRECTAMENTE")
+    print("  ✅ DATABASE SETUP COMPLETE!")
     print("=" * 70)
-
-    # Verificación final
-    print("\nVerificando...")
-    try:
-        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-        from controller.database_manager import DatabaseManager
-        db = DatabaseManager()
-        if db.test_connection():
-            stats = db.get_statistics_db()
-            print(f"  ✓ Conexión exitosa")
-            print(f"  ✓ Routers activos: {stats.get('active_routers', 0)}")
-            print(f"  ✓ Enlaces activos: {stats.get('active_links', 0)}")
-        else:
-            print("  ⚠ Verificación manual requerida")
-    except Exception as e:
-        print(f"  ⚠ No se pudo verificar: {e}")
 
     return True
 

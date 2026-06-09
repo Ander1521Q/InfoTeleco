@@ -1,14 +1,12 @@
 """
 Main Controller for Centralized Routing System.
 Acts as TCP server handling router registrations, topology updates, and routing table distribution.
-Author: Telecom Engineering Academic Project
-Date: 2024
 """
 
 import sys
 import os
 
-# Agregar la ruta del proyecto al path de Python
+# Add project root to Python path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import socket
@@ -85,23 +83,25 @@ class RoutingController:
     def _handle_client(self, client_socket: socket.socket, client_address: tuple):
         """Handle client (router) connection."""
         try:
+            # Recibir el primer mensaje
             message_data = client_socket.recv(4096).decode('utf-8')
 
             if not message_data:
                 self.logger.warning(f"Empty message from {client_address}")
+                client_socket.close()
                 return
 
             message = MessageFactory.parse_message(message_data)
             message_type = message.get('type')
 
             if message_type == MessageType.REGISTER_ROUTER:
-                self._handle_registration(message, client_socket)
-            elif message_type == MessageType.TOPOLOGY_UPDATE:
-                self._handle_topology_update(message, client_socket)
+                # Procesar registro y mantener conexión abierta para más mensajes
+                self._handle_registration_keep_alive(message, client_socket, client_address)
             else:
-                self.logger.warning(f"Unknown message type: {message_type}")
-                response = MessageFactory.create_error(f"Unknown message type: {message_type}", 400)
+                self.logger.warning(f"Unexpected first message type: {message_type}")
+                response = MessageFactory.create_error(f"Expected REGISTER_ROUTER first", 400)
                 client_socket.sendall(response.encode('utf-8'))
+                client_socket.close()
 
         except json.JSONDecodeError as e:
             self.logger.error(f"Invalid JSON from {client_address}: {e}")
@@ -110,17 +110,18 @@ class RoutingController:
                 client_socket.sendall(response.encode('utf-8'))
             except:
                 pass
+            client_socket.close()
         except Exception as e:
             self.logger.error(f"Error handling client {client_address}: {e}")
-        finally:
             client_socket.close()
 
-    def _handle_registration(self, message: dict, client_socket: socket.socket):
-        """Handle router registration (FR-01)."""
+    def _handle_registration_keep_alive(self, message: dict, client_socket: socket.socket, client_address: tuple):
+        """Handle router registration and keep connection alive for subsequent messages."""
         if not MessageValidator.validate_register_router(message):
             self.logger.error("Invalid registration message")
             response = MessageFactory.create_error("Invalid registration message", 400)
             client_socket.sendall(response.encode('utf-8'))
+            client_socket.close()
             return
 
         router_id = message['router_id']
@@ -136,15 +137,58 @@ class RoutingController:
             )
             client_socket.sendall(response.encode('utf-8'))
 
-            if self.topology_manager.get_router_count() >= 2:
-                self.logger.info("Sufficient routers registered, computing routing tables...")
-                self.routing_manager.compute_all_routing_tables()
-                self.routing_manager.broadcast_routing_tables()
+            # Guardar la conexión para mensajes futuros
+            self.active_connections[router_id] = client_socket
+
+            # Ahora esperar más mensajes de este router (como TOPOLOGY_UPDATE)
+            self._wait_for_messages(router_id, client_socket, client_address)
         else:
             response = MessageFactory.create_error(f"Failed to register {router_id}", 500)
             client_socket.sendall(response.encode('utf-8'))
+            client_socket.close()
 
-    def _handle_topology_update(self, message: dict, client_socket: socket.socket):
+    def _wait_for_messages(self, router_id: str, client_socket: socket.socket, client_address: tuple):
+        """Wait for additional messages from a registered router."""
+        try:
+            while self.running:
+                # Configurar timeout para no bloquear indefinidamente
+                client_socket.settimeout(30)
+                try:
+                    message_data = client_socket.recv(4096).decode('utf-8')
+
+                    if not message_data:
+                        self.logger.info(f"Router {router_id} disconnected")
+                        break
+
+                    message = MessageFactory.parse_message(message_data)
+                    message_type = message.get('type')
+
+                    if message_type == MessageType.TOPOLOGY_UPDATE:
+                        self._handle_topology_update(message, client_socket, router_id)
+                    else:
+                        self.logger.warning(f"Unknown message from {router_id}: {message_type}")
+                        response = MessageFactory.create_error(f"Unknown message type", 400)
+                        client_socket.sendall(response.encode('utf-8'))
+
+                except socket.timeout:
+                    # Timeout normal, continuar esperando
+                    continue
+                except socket.error as e:
+                    self.logger.info(f"Router {router_id} connection lost: {e}")
+                    break
+
+        except Exception as e:
+            self.logger.error(f"Error in message loop for {router_id}: {e}")
+        finally:
+            # Limpiar conexión
+            if router_id in self.active_connections:
+                del self.active_connections[router_id]
+            try:
+                client_socket.close()
+            except:
+                pass
+
+    def _handle_topology_update(self, message: dict, client_socket: socket.socket, router_id: str):
         """Handle topology update from router (FR-02)."""
         if not MessageValidator.validate_topology_update(message):
             self.logger.error("Invalid topology update message")
@@ -152,7 +196,6 @@ class RoutingController:
             client_socket.sendall(response.encode('utf-8'))
             return
 
-        router_id = message['router_id']
         neighbors = message['neighbors']
 
         if not self.topology_manager.verify_router_exists(router_id):

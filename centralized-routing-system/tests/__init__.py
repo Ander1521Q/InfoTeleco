@@ -12,6 +12,12 @@ Usage:
     Or from menu: Interactive Menu -> Test & Debug
 """
 
+import sys
+import os
+
+# Add project root to Python path
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 __version__ = "1.0.0"
 __author__ = "Telecom Engineering"
 __all__ = ["run_dijkstra_tests", "run_system_tests", "run_all_tests"]
@@ -122,7 +128,5 @@ def get_test_info():
 
 if __name__ == "__main__":
     # Run all tests when module is executed directly
-    import sys
-
     success = run_all_tests()
     sys.exit(0 if success else 1)
