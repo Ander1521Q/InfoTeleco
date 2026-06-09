@@ -1,0 +1,24 @@
+Traceback (most recent call last):
+  File "C:\Users\ANDER\Desktop\INFO\InfoTeleco\centralized-routing-system\controller\controller.py", line 18, in <module>
+    from controller.topology_manager import TopologyManager
+  File "C:\Users\ANDER\Desktop\INFO\InfoTeleco\centralized-routing-system\controller\controller.py", line 18, in <module>
+    from controller.topology_manager import TopologyManager
+ModuleNotFoundError: No module named 'controller.topology_manager'; 'controller' is not a package
+Traceback (most recent call last):
+  File "C:\Users\ANDER\Desktop\INFO\InfoTeleco\centralized-routing-system\controller\controller.py", line 18, in <module>
+    from controller.topology_manager import TopologyManager
+  File "C:\Users\ANDER\Desktop\INFO\InfoTeleco\centralized-routing-system\controller\controller.py", line 18, in <module>
+    from controller.topology_manager import TopologyManager
+ModuleNotFoundError: No module named 'controller.topology_manager'; 'controller' is not a package
+Traceback (most recent call last):
+  File "C:\Users\ANDER\Desktop\INFO\InfoTeleco\centralized-routing-system\controller\controller.py", line 18, in <module>
+    from controller.topology_manager import TopologyManager
+  File "C:\Users\ANDER\Desktop\INFO\InfoTeleco\centralized-routing-system\controller\controller.py", line 18, in <module>
+    from controller.topology_manager import TopologyManager
+ModuleNotFoundError: No module named 'controller.topology_manager'; 'controller' is not a package
+Traceback (most recent call last):
+  File "C:\Users\ANDER\Desktop\INFO\InfoTeleco\centralized-routing-system\controller\controller.py", line 18, in <module>
+    from controller.topology_manager import TopologyManager
+  File "C:\Users\ANDER\Desktop\INFO\InfoTeleco\centralized-routing-system\controller\controller.py", line 18, in <module>
+    from controller.topology_manager import TopologyManager
+ModuleNotFoundError: No module named 'controller.topology_manager'; 'controller' is not a package

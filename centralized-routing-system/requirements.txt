@@ -1,0 +1,7 @@
+# Centralized Routing System - Dependencies
+# Python 3.8+ required
+
+# MySQL database connector
+mysql-connector-python==8.1.0
+
+# No additional dependencies needed for core functionality
