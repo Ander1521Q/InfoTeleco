@@ -1,5 +1,0 @@
-# Centralized Routing System - Dependencies
-# Python 3.8+ required
-
-# MySQL database connector for XAMPP
-mysql-connector-python==8.1.0
