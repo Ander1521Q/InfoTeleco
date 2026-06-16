@@ -5,16 +5,6 @@
       "destination": "R1",
       "next_hop": "R1",
       "cost": 2.0
-    },
-    {
-      "destination": "R3",
-      "next_hop": "R3",
-      "cost": 1.0
-    },
-    {
-      "destination": "R4",
-      "next_hop": "R3",
-      "cost": 4.0
     }
   ]
 }

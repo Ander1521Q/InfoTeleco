@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f03a4442-1fdf-4de9-a4e8-66e803f97bfa" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ControllerApp/controller.log" beforeDir="false" afterPath="$PROJECT_DIR$/ControllerApp/controller.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RouterApp/config/R5.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RouterApp/data/R1_routing_table.json" beforeDir="false" afterPath="$PROJECT_DIR$/RouterApp/data/R1_routing_table.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RouterApp/data/R2_routing_table.json" beforeDir="false" afterPath="$PROJECT_DIR$/RouterApp/data/R2_routing_table.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RouterApp/data/R3_routing_table.json" beforeDir="false" afterPath="$PROJECT_DIR$/RouterApp/data/R3_routing_table.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RouterApp/data/R5_routing_table.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RouterApp/gui/router_manager_gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/RouterApp/gui/router_manager_gui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RouterApp/network/tcp_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/RouterApp/network/tcp_client.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="3FCroRqYYaAKUoVgC73U9QxGOfY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.main_gui.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-7e47963ff851-f0eec537fc84-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.23892.515" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f03a4442-1fdf-4de9-a4e8-66e803f97bfa" name="Changes" comment="" />
+      <created>1781590068008</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1781590068008</updated>
+    </task>
+    <servers />
+  </component>
+</project>

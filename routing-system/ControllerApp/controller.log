@@ -1,113 +1,39 @@
-2026-06-14 00:29:19,773 - INFO - Startup: marked 4 router(s) as DISCONNECTED (['R1', 'R2', 'R3', 'R4'])
-2026-06-14 00:29:36,620 - INFO - New connection from ('127.0.0.1', 62908)
-2026-06-14 00:29:36,621 - INFO - Message received: REGISTER_ROUTER from R1
-2026-06-14 00:29:36,625 - INFO - Router registered: R1
-2026-06-14 00:29:36,629 - INFO - Message received: TOPOLOGY_UPDATE from R1
-2026-06-14 00:29:36,635 - INFO - Topology updated for: R1
-2026-06-14 00:29:36,640 - INFO - Routing table saved for: R1
-2026-06-14 00:29:44,810 - INFO - New connection from ('127.0.0.1', 62942)
-2026-06-14 00:29:44,810 - INFO - Message received: REGISTER_ROUTER from R2
-2026-06-14 00:29:44,816 - INFO - Router registered: R2
-2026-06-14 00:29:44,820 - INFO - Message received: TOPOLOGY_UPDATE from R2
-2026-06-14 00:29:44,823 - INFO - Topology updated for: R2
-2026-06-14 00:29:44,830 - INFO - Routing table saved for: R1
-2026-06-14 00:29:44,832 - INFO - Routing table saved for: R2
-2026-06-14 00:29:51,864 - INFO - New connection from ('127.0.0.1', 62975)
-2026-06-14 00:29:51,864 - INFO - Message received: REGISTER_ROUTER from R3
-2026-06-14 00:29:51,864 - INFO - New connection from ('127.0.0.1', 62976)
-2026-06-14 00:29:51,865 - INFO - Message received: REGISTER_ROUTER from R4
-2026-06-14 00:29:51,869 - INFO - Router registered: R3
-2026-06-14 00:29:51,871 - INFO - Router registered: R4
-2026-06-14 00:29:51,876 - INFO - Message received: TOPOLOGY_UPDATE from R3
-2026-06-14 00:29:51,879 - INFO - Message received: TOPOLOGY_UPDATE from R4
-2026-06-14 00:29:51,881 - INFO - Topology updated for: R3
-2026-06-14 00:29:51,882 - INFO - Topology updated for: R4
-2026-06-14 00:29:51,893 - INFO - Routing table saved for: R1
-2026-06-14 00:29:51,895 - INFO - Routing table saved for: R2
-2026-06-14 00:29:51,896 - INFO - Routing table saved for: R1
-2026-06-14 00:29:51,897 - INFO - Routing table saved for: R3
-2026-06-14 00:29:51,898 - INFO - Routing table saved for: R2
-2026-06-14 00:29:51,899 - INFO - Routing table saved for: R4
-2026-06-14 00:29:51,900 - INFO - Routing table saved for: R3
-2026-06-14 00:29:51,902 - INFO - Routing table saved for: R4
-2026-06-14 00:30:01,547 - INFO - Router 'R2' disconnected (('127.0.0.1', 62942))
-2026-06-14 00:30:01,548 - INFO - Router 'R2' TCP connection lost — marking DISCONNECTED
-2026-06-14 00:30:01,559 - INFO - Routing table recalculated for: R1
-2026-06-14 00:30:01,560 - INFO - Routing table recalculated for: R3
-2026-06-14 00:30:01,562 - INFO - Routing table recalculated for: R4
-2026-06-14 00:30:14,804 - INFO - New connection from ('127.0.0.1', 63082)
-2026-06-14 00:30:14,804 - INFO - Message received: REGISTER_ROUTER from R2
-2026-06-14 00:30:14,809 - INFO - Router registered: R2
-2026-06-14 00:30:14,813 - INFO - Message received: TOPOLOGY_UPDATE from R2
-2026-06-14 00:30:14,818 - INFO - Topology updated for: R2
-2026-06-14 00:30:14,827 - INFO - Routing table saved for: R1
-2026-06-14 00:30:14,829 - INFO - Routing table saved for: R2
-2026-06-14 00:30:14,831 - INFO - Routing table saved for: R3
-2026-06-14 00:30:14,833 - INFO - Routing table saved for: R4
-2026-06-14 00:30:48,174 - INFO - Message received: LINK_COST_UPDATE from R1
-2026-06-14 00:30:48,177 - INFO - Link cost updated: R1 \u2194 R3 = 1.0
-2026-06-14 00:30:48,190 - INFO - Routing table saved for: R1
-2026-06-14 00:30:48,192 - INFO - Routing table saved for: R2
-2026-06-14 00:30:48,194 - INFO - Routing table saved for: R3
-2026-06-14 00:30:48,196 - INFO - Routing table saved for: R4
-2026-06-14 12:36:01,045 - INFO - Startup: marked 4 router(s) as DISCONNECTED (['R1', 'R2', 'R3', 'R4'])
-2026-06-14 12:36:38,797 - INFO - New connection from ('127.0.0.1', 49759)
-2026-06-14 12:36:38,798 - INFO - Message received: REGISTER_ROUTER from R1
-2026-06-14 12:36:38,806 - INFO - Router registered: R1
-2026-06-14 12:36:38,809 - INFO - Message received: TOPOLOGY_UPDATE from R1
-2026-06-14 12:36:38,817 - INFO - Topology updated for: R1
-2026-06-14 12:36:38,823 - INFO - Routing table saved for: R1
-2026-06-14 12:36:43,642 - INFO - Message received: ROUTER_DOWN from R1
-2026-06-14 12:36:43,647 - INFO - Router R1 set INACTIVE by itself
-2026-06-14 12:37:16,413 - INFO - New connection from ('127.0.0.1', 59217)
-2026-06-14 12:37:16,413 - INFO - Message received: REGISTER_ROUTER from R2
-2026-06-14 12:37:16,413 - INFO - New connection from ('127.0.0.1', 59218)
-2026-06-14 12:37:16,414 - INFO - Message received: REGISTER_ROUTER from R3
-2026-06-14 12:37:16,414 - INFO - New connection from ('127.0.0.1', 59219)
-2026-06-14 12:37:16,414 - INFO - Message received: REGISTER_ROUTER from R4
-2026-06-14 12:37:16,419 - INFO - Router registered: R2
-2026-06-14 12:37:16,420 - INFO - Router registered: R4
-2026-06-14 12:37:16,421 - INFO - Router registered: R3
-2026-06-14 12:37:16,423 - INFO - Message received: TOPOLOGY_UPDATE from R2
-2026-06-14 12:37:16,427 - INFO - Message received: TOPOLOGY_UPDATE from R3
-2026-06-14 12:37:16,427 - INFO - Message received: TOPOLOGY_UPDATE from R4
-2026-06-14 12:37:16,431 - INFO - Topology updated for: R2
-2026-06-14 12:37:16,435 - ERROR - Handler error (('127.0.0.1', 59218)): 1213 (40001): Deadlock found when trying to get lock; try restarting transaction
-2026-06-14 12:37:16,436 - INFO - Topology updated for: R4
-2026-06-14 12:37:16,446 - INFO - Routing table saved for: R1
-2026-06-14 12:37:16,448 - INFO - Routing table saved for: R2
-2026-06-14 12:37:16,448 - INFO - Routing table saved for: R1
-2026-06-14 12:37:16,451 - INFO - Routing table saved for: R3
-2026-06-14 12:37:16,451 - INFO - Routing table saved for: R2
-2026-06-14 12:37:16,454 - INFO - Routing table saved for: R4
-2026-06-14 12:37:16,454 - INFO - Routing table saved for: R3
-2026-06-14 12:37:16,457 - INFO - Routing table saved for: R4
-2026-06-14 12:38:06,362 - INFO - Message received: ROUTER_DOWN from R2
-2026-06-14 12:38:06,376 - INFO - Routing table recalculated for: R1
-2026-06-14 12:38:06,378 - INFO - Routing table recalculated for: R3
-2026-06-14 12:38:06,380 - INFO - Routing table recalculated for: R4
-2026-06-14 12:38:06,381 - INFO - Router R2 set INACTIVE by itself
-2026-06-14 12:38:25,528 - INFO - Message received: LINK_COST_UPDATE from R1
-2026-06-14 12:38:25,532 - INFO - Link cost updated: R1 \u2194 R2 = 1.0
-2026-06-14 12:38:25,541 - INFO - Routing table saved for: R1
-2026-06-14 12:38:25,543 - INFO - Routing table saved for: R3
-2026-06-14 12:38:25,545 - INFO - Routing table saved for: R4
-2026-06-14 12:38:54,999 - INFO - New connection from ('127.0.0.1', 58375)
-2026-06-14 12:38:55,000 - INFO - Message received: REGISTER_ROUTER from R5
-2026-06-14 12:38:55,004 - INFO - Router registered: R5
-2026-06-14 12:38:55,012 - INFO - Message received: TOPOLOGY_UPDATE from R5
-2026-06-14 12:38:55,016 - INFO - Topology updated for: R5
-2026-06-14 12:38:55,028 - INFO - Routing table saved for: R1
-2026-06-14 12:38:55,031 - INFO - Routing table saved for: R3
-2026-06-14 12:38:55,033 - INFO - Routing table saved for: R4
-2026-06-14 12:38:55,035 - INFO - Routing table saved for: R5
-2026-06-14 12:40:35,584 - INFO - Router 'R1' disconnected (('127.0.0.1', 49759))
-2026-06-14 12:40:35,584 - INFO - Router 'R1' TCP connection lost — marking DISCONNECTED
-2026-06-14 12:40:35,584 - INFO - Router 'R2' disconnected (('127.0.0.1', 59217))
-2026-06-14 12:40:35,584 - INFO - Router 'R3' disconnected (('127.0.0.1', 59218))
-2026-06-14 12:40:35,584 - INFO - Router 'R4' disconnected (('127.0.0.1', 59219))
-2026-06-14 12:40:35,584 - INFO - Router 'R5' disconnected (('127.0.0.1', 58375))
-2026-06-14 12:40:35,584 - INFO - Router 'R2' TCP connection lost — marking DISCONNECTED
-2026-06-14 12:40:35,584 - INFO - Router 'R3' TCP connection lost — marking DISCONNECTED
-2026-06-14 12:40:35,585 - INFO - Router 'R4' TCP connection lost — marking DISCONNECTED
-2026-06-14 12:40:35,585 - INFO - Router 'R5' TCP connection lost — marking DISCONNECTED
+2026-06-16 01:07:59,208 - INFO - Startup: marked 4 router(s) as DISCONNECTED (['R1', 'R2', 'R3', 'R4'])
+2026-06-16 01:08:06,797 - INFO - New connection from ('127.0.0.1', 51184)
+2026-06-16 01:08:06,798 - INFO - Message received: REGISTER_ROUTER from R1
+2026-06-16 01:08:06,803 - INFO - Router registered: R1
+2026-06-16 01:08:06,808 - INFO - Message received: TOPOLOGY_UPDATE from R1
+2026-06-16 01:08:06,814 - INFO - Topology updated for: R1
+2026-06-16 01:08:06,819 - INFO - Routing table saved for: R1
+2026-06-16 01:08:07,229 - INFO - New connection from ('127.0.0.1', 51200)
+2026-06-16 01:08:07,229 - INFO - Message received: REGISTER_ROUTER from R2
+2026-06-16 01:08:07,235 - INFO - Router registered: R2
+2026-06-16 01:08:07,240 - INFO - Message received: TOPOLOGY_UPDATE from R2
+2026-06-16 01:08:07,243 - INFO - Topology updated for: R2
+2026-06-16 01:08:07,250 - INFO - Routing table saved for: R1
+2026-06-16 01:08:07,252 - INFO - Routing table saved for: R2
+2026-06-16 01:08:07,655 - INFO - New connection from ('127.0.0.1', 51219)
+2026-06-16 01:08:07,674 - INFO - Message received: REGISTER_ROUTER from R3
+2026-06-16 01:08:07,679 - INFO - Router registered: R3
+2026-06-16 01:08:07,684 - INFO - Message received: TOPOLOGY_UPDATE from R3
+2026-06-16 01:08:07,687 - INFO - Topology updated for: R3
+2026-06-16 01:08:07,697 - INFO - Routing table saved for: R1
+2026-06-16 01:08:07,699 - INFO - Routing table saved for: R2
+2026-06-16 01:08:07,701 - INFO - Routing table saved for: R3
+2026-06-16 01:08:08,105 - INFO - New connection from ('127.0.0.1', 51241)
+2026-06-16 01:08:08,129 - INFO - Message received: REGISTER_ROUTER from R4
+2026-06-16 01:08:08,135 - INFO - Router registered: R4
+2026-06-16 01:08:08,139 - INFO - Message received: TOPOLOGY_UPDATE from R4
+2026-06-16 01:08:08,143 - INFO - Topology updated for: R4
+2026-06-16 01:08:08,153 - INFO - Routing table saved for: R1
+2026-06-16 01:08:08,157 - INFO - Routing table saved for: R2
+2026-06-16 01:08:08,159 - INFO - Routing table saved for: R3
+2026-06-16 01:08:08,163 - INFO - Routing table saved for: R4
+2026-06-16 01:08:23,077 - INFO - Router 'R1' disconnected (('127.0.0.1', 51184))
+2026-06-16 01:08:23,077 - INFO - Router 'R2' disconnected (('127.0.0.1', 51200))
+2026-06-16 01:08:23,077 - INFO - Router 'R1' TCP connection lost — marking DISCONNECTED
+2026-06-16 01:08:23,077 - INFO - Router 'R4' disconnected (('127.0.0.1', 51241))
+2026-06-16 01:08:23,077 - INFO - Router 'R3' disconnected (('127.0.0.1', 51219))
+2026-06-16 01:08:23,077 - INFO - Router 'R2' TCP connection lost — marking DISCONNECTED
+2026-06-16 01:08:23,078 - INFO - Router 'R4' TCP connection lost — marking DISCONNECTED
+2026-06-16 01:08:23,078 - INFO - Router 'R3' TCP connection lost — marking DISCONNECTED

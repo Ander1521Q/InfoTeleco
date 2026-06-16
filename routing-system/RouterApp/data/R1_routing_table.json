@@ -1,15 +1,4 @@
 {
   "router_id": "R1",
-  "routing_table": [
-    {
-      "destination": "R3",
-      "next_hop": "R3",
-      "cost": 5.0
-    },
-    {
-      "destination": "R4",
-      "next_hop": "R4",
-      "cost": 4.0
-    }
-  ]
+  "routing_table": []
 }
